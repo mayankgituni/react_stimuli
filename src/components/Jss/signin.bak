@@ -11,14 +11,12 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import { Redirect } from 'react-router';
 
 import Image from '../Images/neurology.jpg'
 import NavBar from './NavBar'
 import FormHandler from './FormHandler'
 import useFetchData, {useAddData, useDelData, useUpdateData, useFetch} from './HttpApi'
 import ProfilePage from './ProfilePage';
-import ErrorPage from './ErrorPage';
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,56 +67,38 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const [profile, setProfile] = useState({})
-  const [values, setValues] = React.useState({})
-  const [error, setError] = React.useState(null)
-  let [dat, setDat] = useState(0);
-  
-  // const { handleChange, handleSubmit, values } = FormHandler(login)
-  
-  function handleChange(event) {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    })
-  }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    
+  const { handleChange, handleSubmit, values } = FormHandler(login)
+
+  function login(){
     console.log("Values: ")
     console.log(values)
-    
-    fetch(`http://stimuli.sytes.net:50000/login?email=${values.email}&password=${values.password}`)
+    fetch('/login?email=majansadj&password=asdasd')
       .then(response => response.json())
-      .then((response) => {
-        console.log( "Just you: ")
-        console.log( typeof response )
-        setProfile( response )
-
-        console.log( "Profile data: ")
-        console.log(profile)
-        console.log(dat)
-        setDat(1233)
-      })
-      .catch(error => setError(error))
-    }
-    
-    console.log("==>" )
-    console.log(error)
-    
-
-  // if(Object.keys(profile).length > 1){
-    if(dat > 0){
-      console.log("First Name: " + profile.firstName)
-      return (<div> <ProfilePage props={profile} setD={setDat} /> </div>)
-    }
-
-  if(error != null){
-    
-    return <ErrorPage />
+      .then(data => this.setState({ data }));
   }
+  
+  if(values.
+    length > 0){
     
+    return (<div> <ProfilePage values/> </div>)
+  }
+  console.log("Done values")
+  // let res = null
+
+  // // if(email != ''){
+  // res = useFetchData(`/login?email={values.email}&password={values.password}`);
+  
+  // if (!res) {
+  //   let load;
+    
+  //   if(res.isLoading == true){
+  //     console.log("Loading Time")
+  //     load = <div>Loading...</div>
+  //   }
+    
+  //   console.log("Normal login Page")
+    // Normal login page
     return (
       <div>
         <NavBar/>

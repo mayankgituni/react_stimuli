@@ -5,6 +5,7 @@ import App from './App';
 import SignIn from './components/Jss/SignIn'
 import SignUp from './components/Jss/SignUp'
 import ProfilePage from './components/Jss/ProfilePage'
+import ErrorPage from './components/Jss/ErrorPage'
 import * as serviceWorker from './serviceWorker';
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/ProfilePage" component={ProfilePage} />
+        <Route path="/ErrorPage" component={ErrorPage} />
         <Route path="/" component={App} />
       </Switch>
     </Router>,

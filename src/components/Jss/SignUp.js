@@ -12,7 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-
+import { Redirect } from 'react-router';
 // Inhouse Material Ui imports
 import Card from "../MaterialUi/Jss/Card/Card.js";
 import CardBody from '../MaterialUi/Jss/Card/CardBody.js';
@@ -27,6 +27,7 @@ import image from '../Images/rightleftbrain.jpg';
 import styles from "../Style/loginPage.js";
 import useFormValidation from './useFormValidation';
 import ValidateAuth from './ValidateAuth';
+import SignIn from "./SignIn"
 import "../Style/errorStyle.CSS";
 
 const useStyles = makeStyles(styles);
@@ -61,14 +62,18 @@ export default function SignUp() {
   const [cardAnimaton,
     setCardAnimation] = React.useState("cardHidden");
   const radioclasses = useStyles();
-
-  // function handleChange(event) {
-  //   setValue(event.target.value);
-  // }
+  
+  console.log("values: ")
+  console.log(values)
 
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
+
+  if(isSubmitting){
+    return <Redirect to='/SignIn' push={true} />
+  }
+
   return (
     <div>
       <NavBar/>
@@ -176,18 +181,14 @@ export default function SignUp() {
                             className={radioclasses.group}
                             value={values.type}
                             onChange={handleChange}>
-                            <FormControlLabel value="Researcher" control={< Radio />} label="Researcher"/>
-                            <FormControlLabel value="Practitioner" control={< Radio />} label="Practitioner"/>
+                            <FormControlLabel value="RESEARCHER" control={< Radio />} label="Researcher"/>
+                            <FormControlLabel value="PRACTITIONER" control={< Radio />} label="Practitioner"/>
 
                           </RadioGroup>
                         </FormControl>
 
                       </div>
-                      <Grid item xs={12}>
-                        <FormControlLabel
-                          control={< Checkbox value = "allowExtraEmails" color = "primary" />}
-                          label="I want to receive promotions and updates via email."/>
-                      </Grid>
+                      
                     </Grid>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>

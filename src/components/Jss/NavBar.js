@@ -11,8 +11,64 @@ import {Link} from "react-router-dom";
 import LandingStyle from '../Style/LandingStyle'
 
 const useStyles = makeStyles(LandingStyle);
-const NavBar = () => {
+const NavBar = (p) => {
     const classes = useStyles();
+
+    if(p.call == "login"){
+        return(
+        <div>
+            <AppBar
+                position="sticky"
+                style={{
+                backgroundColor: "#124059"
+            }}>
+                <Toolbar>
+                    <Typography variant="title" align="Left" component="h1">
+                        STIMULI SOLUTIONS
+                    </Typography>
+
+                    <Typography variant="title" align="Right" color="secondary" component="h1">
+                        <GridItem md={50} className={classes.textCenter}>
+                            <Link to={"/"} className={classes.link}>
+                                <Button
+                                    color="secondary"
+                                    style={{
+                                    backgroundColor: "#124059"
+                                }}
+                                    size="sm">
+                                    {/* HOME */}
+                                    <img
+                                        src={require("../Images/brainlogo.png")}
+                                        style={{
+                                        width: 60,
+                                        height: 50,
+                                        tintColor: '#f1f1f1'
+                                    }}
+                                        alt="HOME"></img>
+                                </Button>
+                            </Link>
+                        </GridItem>
+                    </Typography>
+                    
+                    <hr/>
+                    
+                    <Link to={"/Signin"} className={classes.link}>
+                        <Button
+                            size="lg"
+                            onClick={()=>p.func(0)}
+                            align="right"
+                            color="secondary"
+                            style={{
+                            backgroundColor: "#124059"
+                        }}>
+                            <main>Logout</main>
+                        </Button>
+                    </Link>
+
+                </Toolbar>
+            </AppBar>
+        </div>)
+    }
     return (
         <div>
             <AppBar
@@ -48,26 +104,8 @@ const NavBar = () => {
                         </GridItem>
                     </Typography>
                     <hr/>
-                    <h2>Web-App download:
-                    </h2>
-                    <a href="http://stimuli.sytes.net:50000/webApp" color="primary">
-                        <h2 color="primary">
-                            Click Here
-                        </h2>
-                    </a>
-                    <hr/>
-                    <Link to={"/ProfilePage"} className={classes.link}>
-                        <Button
-                            size="lg"
-                            align="right"
-                            color="inherit"
-                            style={{
-                            backgroundColor: "#124059"
-                        }}>
-
-                            <main>DProfile</main>
-                        </Button>
-                    </Link>
+                    
+                    
                     <Link to={"/SignIn"} className={classes.link}>
                         <Button
                             size="lg"

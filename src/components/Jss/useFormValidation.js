@@ -34,9 +34,31 @@ function useFormValidation(initialState, validate) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setSubmitting(true)
     const validationErrors = validate(values)
     setErrors(validationErrors)
-    setSubmitting(true)
+
+    let dataBody = {
+      fName: values.firstName,
+      lName: values.lastName,
+      email: values.email,
+      password: values.password,
+      type: values.type
+    }
+    try {
+      const res = fetch("http://stimuli.sytes.net:50000/signup", {
+        method: 'POST',
+        body: JSON.stringify(dataBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = res.json();
+      
+    } catch (error) {
+      return error;
+    }
+    
   }
 
   return {handleSubmit, handleChange, handleBlurr, values, errors, isSubmitting}

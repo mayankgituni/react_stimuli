@@ -1,6 +1,8 @@
 import React from "react"
 import axios from 'axios'
 import useEndpoint from './useEndpoint'
+import useFetchData, {useAddData, useDelData, useUpdateData, useFetch} from './HttpApi'
+
 
 function useProfileFetcher(){
   const [data, setData] = React.useState({})
@@ -24,11 +26,6 @@ function useProfileFetcher(){
     console.log(values)
 
     const URL = "http://localhost:50000/login?email="+values.email+"&password="+values.password;
-    
-    // const todo = useEndpoint({
-    //   method: "GET",
-    //   url: URL
-    // });
 
     axios("http://stimuli.sytes.net:50000/login?email=asdasd&password=asdsa")
     .then(res =>{
